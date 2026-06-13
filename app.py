@@ -1,1 +1,45 @@
-# Tiêu đề ứng dụng st.title("TÍNH TIỀN GỬI TIẾT KIỆM") # Nhập dữ liệu C = st.number_input( "Nhập số tiền gửi (triệu đồng):", min_value=0.0, value=500.0 ) i = st.number_input( "Nhập lãi suất tiết kiệm theo năm (%):", min_value=0.0, value=6.0 ) n = st.number_input( "Nhập số tháng gửi:", min_value=1, value=4 ) # Nút tính toán if st.button("Tính toán"): # Đổi lãi suất từ % sang số thập phân i = i / 100 # Lãi đơn A = C * (1 + n * i / 12) # Lãi kép B = C * (1 + i / 12) ** n st.subheader("Kết quả") st.success( f"Tổng tiền nhận được theo lãi đơn: {A:,.4f} triệu đồng" ) st.success( f"Tổng tiền nhận được theo lãi kép: {B:,.4f} triệu đồng" ) st.info( f"Chênh lệch giữa lãi kép và lãi đơn: {B - A:,.4f} triệu đồng" )
+import streamlit as st
+
+# Tiêu đề app
+st.title("📈 TÍNH TIỀN GỬI TIẾT KIỆM")
+
+# Nhập dữ liệu
+C = st.number_input(
+    "Nhập số tiền gửi (triệu đồng)",
+    min_value=0.0,
+    value=100.0
+)
+
+i = st.number_input(
+    "Nhập lãi suất tiết kiệm theo năm (%)",
+    min_value=0.0,
+    value=6.0
+)
+
+n = st.number_input(
+    "Nhập số tháng gửi",
+    min_value=1,
+    value=12
+)
+
+# Đổi % sang số thập phân
+i = i / 100
+
+# Nút tính toán
+if st.button("Tính toán"):
+    
+    # Lãi đơn
+    A = C * (1 + i * n / 12)
+
+    # Lãi kép
+    B = C * (1 + i / 12) ** n
+
+    st.subheader("Kết quả")
+
+    st.success(
+        f"Tổng tiền nhận được theo lãi đơn: {A:,.4f} triệu đồng"
+    )
+
+    st.success(
+        f"Tổng tiền nhận được theo lãi kép: {B:,.4f} triệu đồng"
+    )
